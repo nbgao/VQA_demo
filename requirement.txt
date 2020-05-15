@@ -1,0 +1,25 @@
+1. /data/pretrained_emb.npy 预训练词嵌入
+2. /data/token_to_ix.json token索引映射
+3. /data/vqa/answer_dict.json 答案词典
+4. model 模型代码及预训练模型文件
+   model/bua-caffe-frcn-r101.pth 图像特征提取模型
+   model/muan.pkl MUAN模型
+
+5. bottom-up-attention.pytorch (PyTorch>=1.4  Cuda>=9.2)
+    # clone the repository
+    $ git clone --recursive https://github.com/MILVLG/bottom-up-attention.pytorch
+    # install apex
+    $ git clone https://github.com/NVIDIA/apex.git
+    $ cd apex
+    $ python setup.py install
+    $ cd ..
+    # install the rest modules
+    $ python setup.py build develop
+
+6. detectron2
+    $ pip install cython
+    $ pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+    $ cd detectron2
+    $ pip install -e .
+
+    
