@@ -9,7 +9,7 @@
 # python client.py --mode=INFERENCE --img_path='data/img/test/img2.jpg' --ques="Where is it?" --lang=EN
 import requests
 import argparse
-from util.translation import process_translate
+# from util.translation import process_translate
 
 # Initialize the PyTorch REST API endpoint URL
 REST_API_URL = 'http://127.0.0.1:5000/predict'
@@ -44,7 +44,6 @@ if __name__ == '__main__':
     mode: INFERENCE: 服务器线上推理模式  TEST: 测试模式
     dataset: TEST模式下数据集名称
     idx: 数据集内索引号
-    gpu: 运行显卡编号
     img_path: INFERENCE模式下图片路径
     ques: INFERENCE下问题
     lang: 问题/答案语言选项
@@ -134,21 +133,23 @@ if __name__ == '__main__':
         if language in ['EN', 'en']:
             question = ques_list[dataset][idx]
         elif language in ['ZH', 'zh']:
-            chinese_question = chinese_ques_list[dataset][idx]
-            question, trans_type = process_translate(chinese_question)
+            question = chinese_ques_list[dataset][idx]
+            # chinese_question = chinese_ques_list[dataset][idx]
+            # question, trans_type = process_translate(chinese_question)
 
     elif mode in ['INFERENCE', 'inference']:
         image_path = args.img_path
-        if language in ['EN', 'en']:
-            question = args.ques
-        elif language in ['ZH', 'zh']:
-            chinese_question = args.ques
-            question, trans_type = process_translate(chinese_question)
+        question = args.ques
+        # if language in ['EN', 'en']:
+        #     question = args.ques
+        # elif language in ['ZH', 'zh']:
+        #     chinese_question = args.ques
+            # question, trans_type = process_translate(chinese_question)
 
     # image_path = args.image_path
     print('image_path:', image_path)
-    if language in ['ZH', 'zh']:
-        print('chinese_quesion:', chinese_question)
+    # if language in ['ZH', 'zh']:
+    #     print('chinese_quesion:', chinese_question)
     print('question:', question)
 
     predict_result(image_path, question, language)

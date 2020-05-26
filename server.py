@@ -266,6 +266,10 @@ def predict():
             image_path = data['image_path']
             question = data['question']
             language = data['language']
+            if language in ['ZH', 'zh']:
+                chinese_question = question
+                print('chinese_question:', chinese_question)
+                question, trans_type = process_translate(chinese_question)
             print('image_path:', image_path)
             print('question:', question)
             print('language:', language)
@@ -345,5 +349,5 @@ if __name__ == '__main__':
     time_end = time.time()
     print('Server start time: {:.3f}s'.format(time_end-time_start))
 
-    app.run()
+    app.run(host='127.0.0.1', port=5000)
     
